@@ -256,14 +256,14 @@ EdgeInsets parseEdgeInsets(Expression expression) {
               bottom: bottom.toDouble());
         case 'all':
           num all = 0;
-          if ((argumentList?.length ?? 0) > 0 &&
+          if (argumentList.isNotEmpty &&
               argumentList[0].isNumericLiteral) {
             all = (argumentList[0].asNumericLiteral).value;
           }
           return EdgeInsets.all(all.toDouble());
         case 'fromLTRB':
           num left = 0, top = 0, right = 0, bottom = 0;
-          if ((argumentList?.length ?? 0) == 4) {
+          if (argumentList.length == 4) {
             if (argumentList[0].isNumericLiteral) {
               left = (argumentList[0].asNumericLiteral).value;
             }
@@ -316,13 +316,13 @@ BoxConstraints? parseBoxConstraints(Expression expression) {
           return BoxConstraints.expand(width: width, height: height);
         case 'loose':
           Size size = Size.zero;
-          if ((argumentList?.length ?? 0) == 1) {
+          if (argumentList.length == 1) {
             size = parseSize(argumentList[0]);
           }
           return BoxConstraints.loose(size);
         case 'tight':
           Size size = Size.zero;
-          if ((argumentList?.length ?? 0) == 1) {
+          if (argumentList.length == 1) {
             size = parseSize(argumentList[0]);
           }
           return BoxConstraints.tight(size);
@@ -375,25 +375,25 @@ Size parseSize(Expression sizeExpression) {
         switch (memberExpression.property) {
           case 'fromWidth':
             num width = 0;
-            if ((argumentList?.length ?? 0) == 1) {
+            if (argumentList.length == 1) {
               width = (argumentList[0].asNumericLiteral).value;
             }
             return Size.fromWidth(width.toDouble());
           case 'fromHeight':
             num height = 0;
-            if ((argumentList?.length ?? 0) == 1) {
+            if (argumentList.length == 1) {
               height = (argumentList[0].asNumericLiteral).value;
             }
             return Size.fromHeight(height.toDouble());
           case 'fromRadius':
             num radius = 0;
-            if ((argumentList?.length ?? 0) == 1) {
+            if (argumentList.length == 1) {
               radius = (argumentList[0].asNumericLiteral).value;
             }
             return Size.fromRadius(radius.toDouble());
           case 'square':
             num dimension = 0;
-            if ((argumentList?.length ?? 0) == 1) {
+            if (argumentList.length == 1) {
               dimension = (argumentList[0].asNumericLiteral).value;
             }
             return Size.square(dimension.toDouble());
@@ -402,7 +402,7 @@ Size parseSize(Expression sizeExpression) {
         var identifier = callee.asIdentifier;
         if (identifier.name == 'Size') {
           num width = 0, height = 0;
-          if ((argumentList?.length ?? 0) == 2) {
+          if (argumentList.length == 2) {
             width = (argumentList[0].asNumericLiteral).value;
             height = (argumentList[0].asNumericLiteral).value;
           }

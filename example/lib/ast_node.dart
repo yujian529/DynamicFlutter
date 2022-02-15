@@ -78,7 +78,7 @@ class Identifier extends AstNode {
   static Identifier? fromAst(Map? ast) {
     if(ast != null &&
         ast['type'] == astNodeNameValue(AstNodeName.Identifier)) {
-      return Identifier(ast!['name'], ast: ast!);
+      return Identifier(ast['name'], ast: ast);
     }
     return null;
   }
@@ -410,7 +410,7 @@ class FunctionDeclaration extends AstNode {
 
 class MethodInvocation extends AstNode {
   Expression callee;
-  List<Expression> argumentList;
+  List<Expression> argumentList = [];
   SelectAstClass selectAstClass;
 
   MethodInvocation(this.callee, this.argumentList, this.selectAstClass,
@@ -931,7 +931,7 @@ class SwitchCase extends AstNode {
 }
 
 class ReturnStatement extends AstNode {
-  Expression argument;
+  Expression? argument;
 
   ReturnStatement(this.argument, {required Map ast}) : super(ast: ast);
 

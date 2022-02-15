@@ -14,14 +14,14 @@ import 'widget_builders/widget_builders.dart';
 class AstStatefulWidget extends StatefulWidget {
   final Map ast;
 
-  AstStatefulWidget(this.ast);
+  const AstStatefulWidget(this.ast, {Key? key}) : super(key: key);
 
   @override
   _AstStatefulWidgetState createState() => _AstStatefulWidgetState();
 }
 
 class _AstStatefulWidgetState extends State<AstStatefulWidget> {
-  late Widget _bodyWidget;
+  Widget? _bodyWidget;
 
   static const TAG = "AstStatefulWidgetState";
 
@@ -30,7 +30,7 @@ class _AstStatefulWidgetState extends State<AstStatefulWidget> {
     if (rootExpression != null && rootExpression.isProgram) {
       var bodyList = rootExpression.asProgram.body;
 
-      if ((bodyList?.length ?? 0) == 2) {
+      if (bodyList.length == 2) {
         var stateClass = bodyList[1].asClassDeclaration;
         if (stateClass.superClause == 'State') {
           var stateBodyList = stateClass.body;
@@ -82,12 +82,10 @@ class _AstStatefulWidgetState extends State<AstStatefulWidget> {
   Widget build(BuildContext context) {
     return Material(
       color: Colors.white,
-      child: _bodyWidget == null
-          ? Center(
+      child: _bodyWidget ?? Center(
               child: SizedBox.fromSize(
-                  size: Size.square(30), child: CircularProgressIndicator()),
-            )
-          : _bodyWidget,
+                  size: const Size.square(30), child: const CircularProgressIndicator()),
+            ),
     );
   }
 }

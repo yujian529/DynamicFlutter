@@ -93,7 +93,7 @@ BorderRadius parseBorderRadius(Expression expression) {
       switch (callee.asMemberExpression.property) {
         case 'circular':
           num circular = 0;
-          if ((argumentList?.length ?? 0) == 1) {
+          if (argumentList.length == 1) {
             circular = argumentList[0].asNumericLiteral.value;
           }
           return BorderRadius.circular(circular.toDouble());

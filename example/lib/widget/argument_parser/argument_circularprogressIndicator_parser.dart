@@ -15,9 +15,9 @@ Animation<Color> parseValueColor(Expression expression) {
       expression.asMethodInvocation.callee.asIdentifier.name ==
           'AlwaysStoppedAnimation') {
     var argumentList = expression.asMethodInvocation.argumentList;
-    if ((argumentList?.length ?? 0) > 0) {
+    if (argumentList.isNotEmpty) {
       return AlwaysStoppedAnimation(parseColor(argumentList[0]));
     }
   }
-  return AlwaysStoppedAnimation(Colors.black);
+  return const AlwaysStoppedAnimation(Colors.black);
 }

@@ -34,14 +34,14 @@ class RecommandBuilderBox implements BaseBuilderBox {
       if (callee.isIdentifier) {
         for (var builder in _widgetBuilders) {
           if (builder.widgetName == callee.asIdentifier.name) {
-            return builder?.build(widgetExpression, variables: variables) ?? Container(color: Colors.red,);
+            return builder.build(widgetExpression, variables: variables);
           }
         }
       } else if (callee.isMemberExpression) {
         for (var builder in _widgetBuilders) {
           if (builder.widgetName ==
               callee.asMemberExpression.object.asIdentifier.name) {
-            return builder?.build(widgetExpression, variables: variables) ?? Container(color: Colors.red,);
+            return builder.build(widgetExpression, variables: variables);
           }
         }
       }
